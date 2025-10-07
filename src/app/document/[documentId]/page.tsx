@@ -1,12 +1,16 @@
 'use client';
 
-import { useParams } from 'next/navigation';
 import React from 'react';
+import Editor from './editor';
+import {Toolbar} from './Toolbar';
 
 const Page = () => {
-  const params = useParams();
-
-  return <div>DocumentID: {params.id}</div>;
+  return (
+    <div className="min-h-screen bg-[#fafbfd]">
+      <Toolbar/>
+      <Editor />
+    </div>
+  );
 };
 
 export default Page;
