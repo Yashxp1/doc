@@ -2,15 +2,22 @@
 
 import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { useEditor, EditorContent } from '@tiptap/react';
+import Image from '@tiptap/extension-image';
 import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
 import {
   Table,
   TableCell,
   TableHeader,
   TableRow,
 } from '@tiptap/extension-table';
+import Link from '@tiptap/extension-link';
 import { useEditorStore } from '@/store/user-editor-store';
-import { TextStyle, FontFamily } from '@tiptap/extension-text-style';
+import { TextStyle, FontFamily, Color } from '@tiptap/extension-text-style';
+import Highlight from '@tiptap/extension-highlight';
+import { FontSizeExtension } from '@/extensions/font-size';
+import { LineHeightExtension } from '@/extensions/line-height';
+import { Ruler } from './ruler';
 
 const Editor = () => {
   const { setEditor } = useEditorStore();
@@ -49,8 +56,24 @@ const Editor = () => {
     },
     extensions: [
       StarterKit,
+      LineHeightExtension.configure({
+        types: ['heading', 'paragraph'],
+        defaultLineHeight: 'normal',
+      }),
+      FontSizeExtension,
+      Color,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+      }),
+      Highlight.configure({ multicolor: true }),
       FontFamily,
       TextStyle,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      Image,
       Table,
       TableCell,
       TableRow,
@@ -79,6 +102,8 @@ const Editor = () => {
 
   return (
     <div className="size-full overflow-x-auto bg-[#f9fbfd] px-4 print:p-0 print:bg-white print:overflow-visible">
+      <Ruler />
+
       <div className="min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
       </div>
