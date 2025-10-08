@@ -124,6 +124,15 @@
 
 .tiptap {
 
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
   /* Table-specific styling */
   table {
     border-collapse: collapse;
@@ -141,7 +150,7 @@
       position: relative;
       vertical-align: top;
 
-      > * {
+      >* {
         margin-bottom: 0;
       }
     }
