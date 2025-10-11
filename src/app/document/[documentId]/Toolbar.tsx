@@ -1,3 +1,4 @@
+'use client';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -526,8 +527,9 @@ export const Toolbar = () => {
       {
         label: 'Comment',
         icon: MessageSquarePlusIcon,
-        onClick: () => console.log('Todo: comment'),
-        isActive: false,
+        // Replace with a valid command or remove if not needed
+        onClick: () => editor?.chain().focus().addPendingComment().run(),
+        isActive: editor?.isActive('liveblocksCommentMark'),
       },
       {
         label: 'List Todo',
